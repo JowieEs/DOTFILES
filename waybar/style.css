@@ -48,7 +48,7 @@
 
 /* The whole bar */
 #waybar {
-    background: rgba(10,10,10,0.85);
+    background: rgba(0,0,0,0.85);
     color: white;
     font-family: Cantarell, Font Awesome, Noto Sans, sans-serif;    
     font-weight: bold;
@@ -155,6 +155,9 @@
 
 #pulseaudio.muted {
     /* No styles */
+}
+#custom-wlogout {
+    color: #e1251b;
 }
 
 #custom-spotify {

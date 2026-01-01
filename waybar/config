@@ -30,11 +30,10 @@
     "modules-right": [
         "network",
         "battery",
-        //"cpu",
-        //"memory",
-        //"temperature",
+       //"cpu",
+       //"memory",
+       //"temperature",
         "backlight",
-        //"custom/brightness",
         "pulseaudio",
         "bluetooth",
         "custom/wlogout",
@@ -74,8 +73,7 @@
     "clock#date": {
       "interval": 120,
       "format": "  {:%e %b %Y}", // Icon: calendar-alt
-      "tooltip-format": "{:%e %B %Y}",
-      "on-click": "LC_TIME=es_ES.UTF-8 gnome-calendar"
+      "tooltip-format": "{:%e %B %Y}"
     },
 
     "cpu": {
@@ -189,12 +187,6 @@
     "backlight": {
         "device": "intel_backlight",
         "format": " {percent}%",
-    },
-    "custom/brightness": {
-        "exec": "stdbuf -oL ~/.config/waybar/scripts/brightness.sh",
-        "interval": 0,
-        "on-scroll-up": "brightnessctl set +1%",
-        "on-scroll-down": "brightnessctl set 1%-"
     },
 
     "bluetooth": {

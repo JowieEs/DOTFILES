@@ -1,0 +1,20 @@
+# Mako configuration
+
+# Timeout (in seconds) before notifications disappear
+default-timeout=5000
+
+# Background color (RGBA)
+background-color=#222222
+
+# Text color (white for contrast)
+text-color=#ffffff
+font=Cantarell 11
+
+# Accent color (border, progress bar, etc.)
+border-color=#e1251b
+
+# Optional: rounding and padding for a cleaner look
+border-size=2
+padding=10
+margin=10
+

@@ -8,39 +8,99 @@ return {
       return opts
     end,
   },
+
   {
     "neovim/nvim-lspconfig",
     config = function()
-      -- Python LSP
+      -- LSP server configs
       vim.lsp.config("pyright", {})
 
-      -- Golang LSP
       vim.lsp.config("gopls", {
-          settings = {
-              gopls = {
-                  gofumpt = true,
-                  staticcheck = true,
-              },
+        settings = {
+          gopls = {
+            gofumpt = true,
+            staticcheck = true,
           },
+        },
       })
 
-      -- Clangd LSP
       vim.lsp.config("clangd", {
-        cmd = { "clangd", "--background-index", "--clang-tidy" }
+        cmd = {
+          "clangd",
+          "--background-index",
+          "--clang-tidy",
+        },
       })
-      vim.lsp.enable({"pyright", "clangd", "gopls" })
 
-      vim.api.nvim_create_autocmd("BufWritePre", {
-          callback = function()
-              vim.lsp.buf.format({ async = false })
-          end,
+      -- Enable servers
+      vim.lsp.enable({ "pyright", "clangd", "gopls" })
+
+      -- Diagnostics
+      vim.diagnostic.config({
+        update_in_insert = true,
+
+        virtual_text = {
+          spacing = 4,
+          prefix = "●",
+        },
+        signs = true,
+        underline = true,
+        severity_sort = true,
+        float = {
+          source = "always",
+          border = "rounded",
+        },
       })
-      -- Diagnostic configuration
+
       vim.o.updatetime = 250
-      vim.cmd [[
-        autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false})
-      ]]
-    end,
-  }
-}
 
+      vim.api.nvim_create_autocmd("CursorHold", {
+        callback = function()
+          local opts = {
+            focusable = false,
+            close_events = {
+              "BufLeave",
+              "CursorMoved",
+              "InsertEnter",
+              "FocusLost",
+            },
+            border = "rounded",
+            source = "always",
+            prefix = " ",
+            scope = "cursor",
+          }
+
+          vim.diagnostic.open_float(nil, opts)
+        end,
+      })
+    end,
+  },
+
+  {
+    "stevearc/conform.nvim",
+    event = { "BufWritePre" },
+    config = function()
+      local conform = require("conform")
+
+      conform.setup({
+        format_on_save = {
+          timeout_ms = 500,
+          lsp_format = "fallback",
+        },
+
+        formatters_by_ft = {
+          cpp = { "clang-format" },
+          c = { "clang-format" },
+          python = { "black" },
+          go = { "gofumpt" },
+        },
+
+        formatters = {
+          ["clang-format"] = {
+            prepend_args = { "--style=Google" },
+          },
+        },
+      })
+    end,
+  },
+}
