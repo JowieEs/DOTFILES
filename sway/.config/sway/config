@@ -1,5 +1,5 @@
 # ==============================================================================
-#  Sway Configuration - ThinkPad L14 Gen 4
+#  Sway Configuration - ThinkPad L14 Gen 4 (Main)
 # ==============================================================================
 ### Variables
 set $mod Mod4
@@ -7,65 +7,11 @@ set $left h
 set $down j
 set $up k
 set $right l
-set $term alacritty
-set $menu wofi --show drun --style ~/.config/wofi/style.css
-set $lock ~/.config/sway/scripts/lock.sh
-set $suspend ~/.config/sway/scripts/suspend.sh
-
-
-# Colors
-set $color_focus #e1251b
-set $color_unfocus #333333
-
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
-
-# Start UI elements
-exec waybar
-exec mako
-exec easyeffects --gapplication-service
-exec swayosd-server
-
-### Output configuration
-output DP-2 mode 3440x1440@120.00Hz pos 0 0
-output eDP-1 pos 0 1440
-# Clamshell Mode
-bindswitch lid:on output eDP-1 disable
-bindswitch lid:off output eDP-1 enable
-
-# Wallpaper
-output * bg ~/Pictures/1657003.png fill
-
-### Idle configuration
-exec swayidle -w \
-    timeout 120 $lock \
-    timeout 300 $suspend \
-    before-sleep $lock
-
-### Input configuration
-
-# 1. Keyboard Layout
-input type:keyboard {
-    xkb_layout us
-    xkb_variant intl
-}
-
-# 2. TrackPoint (The Red Nub) - Flat profile for precision
-input type:pointer {
-    accel_profile flat
-    pointer_accel 0.5
-}
-
-# 3. Touchpad - Natural scrolling and tap to click
-input "10182:480:GXTP5100:00_27C6:01E0_Touchpad" {
-    dwt enabled
-    tap enabled
-    natural_scroll enabled
-    accel_profile adaptive
-}
+set $term footclient
+set $menu footclient -a launcher sway-launcher-desktop
+#set $menu wofi --show drun --style ~/.config/wofi/style.css
 
 ### Key bindings
-
 # Basics
 bindsym $mod+Return exec $term
 bindsym $mod+q kill
@@ -76,6 +22,9 @@ bindsym $mod+Shift+e exec swaynag -t warning -m 'Exit Sway?' -B 'Yes, exit sway'
 # Screenshots (Grim + Slurp)
 bindsym Print exec ~/.config/sway/scripts/screenshot.sh
 bindsym $mod+p exec ~/.config/sway/scripts/screenshot.sh
+
+# Screen Recording (wf-recorder + Slurp)
+bindsym $mod+Shift+r exec ~/.config/sway/scripts/record-screen.sh
 
 # Navigation
 bindsym $mod+$left focus left
@@ -142,30 +91,18 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-# Sink volume raise optionally with --device
+# Hardware Controls (Volume/Brightness via swayosd)
 bindsym XF86AudioRaiseVolume exec swayosd-client --output-volume raise
-# Sink volume lower optionally with --device
 bindsym XF86AudioLowerVolume exec  swayosd-client --output-volume lower
-# Sink volume toggle mute
 bindsym XF86AudioMute exec swayosd-client --output-volume mute-toggle
-# Source volume toggle mute
 bindsym XF86AudioMicMute exec swayosd-client --input-volume mute-toggle
-
-
-# Brightness
 bindsym XF86MonBrightnessUp   exec swayosd-client --brightness raise
 bindsym XF86MonBrightnessDown exec swayosd-client --brightness lower
+bindsym XF86KbdBrightnessUp exec swayosd-client --kbd-backlight raise
+bindsym XF86KbdBrightnessDown exec swayosd-client --kbd-backlight lower
 
-# Borders
-default_border pixel 2
-default_floating_border pixel 2
-hide_edge_borders smart
-smart_gaps on
-gaps inner 10
-gaps outer 0
-
-# Class colors
-client.focused          $color_focus $color_focus #FFFFFF $color_focus
+# Display Settings
+bindsym XF86Display exec nwg-displays
 
 # Window Rules
 for_window [app_id="blueman-manager"] floating enable, move position 75% 0%, resize set width 30% height 40%
@@ -173,13 +110,14 @@ for_window [app_id="org.pulseaudio.pavucontrol"] floating enable, move position 
 for_window [app_id="nwg-displays"] floating enable, move position 75% 0%, resize set width 30% height 40%
 for_window [app_id="nmtui"] floating enable, move position 75% 0%, resize set width 30% height 40%
 for_window [app_id="com.github.wwmm.easyeffects"] floating enable
+for_window [app_id="^launcher$"] floating enable, sticky enable, move position center, resize set 30 ppt 60 ppt
 
 # Inhibit idle for fullscreen apps (e.g. YouTube, Games)
 for_window [app_id=".*"] inhibit_idle fullscreen
 for_window [class=".*"] inhibit_idle fullscreen
 
-# Workspace Assignments
-workspace 1 output DP-2 eDP-1
-workspace 2 output DP-2 eDP-1
 
 include /etc/sway/config.d/*
+include $HOME/.config/sway/config.d/*
+include $HOME/.config/sway/outputs
+include $HOME/.config/sway/workspaces

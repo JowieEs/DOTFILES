@@ -28,15 +28,16 @@
         "clock#time",
     ],
     "modules-right": [
-        "network",
-        "battery",
-       //"cpu",
-       //"memory",
-       //"temperature",
-        "backlight",
-        "pulseaudio",
-        "bluetooth",
-        "custom/wlogout",
+      // "network",
+      "pulseaudio",
+      "battery",
+      "memory",
+      "cpu",
+      "temperature",
+      "backlight",
+      "bluetooth",
+      "tray",
+      "custom/wlogout",
     ],
 
 
@@ -45,40 +46,40 @@
     // -------------------------------------------------------------------------
 
     "battery": {
-        "interval": 30,
+        "interval":60,
         "states": {
             "warning": 30,
             "critical": 15
         },
         // Connected to AC
-        "format": "  {icon}  {capacity}%", // Icon: bolt
+        "format": "\uf1e6 {capacity}%", // Icon: bolt
         // Not connected to AC
-        "format-discharging": "{icon}  {capacity}%",
+        "format-discharging": "{icon} {capacity}%",
         "format-icons": [
             "", // Icon: battery-full
             "", // Icon: battery-three-quarters
             "", // Icon: battery-half
             "", // Icon: battery-quarter
             ""  // Icon: battery-empty
-        ],
+        ],        
         "tooltip": true
     },
 
     "clock#time": {
         "interval": 60,
-        "format": " {:%H:%M}",
+        "format": "\uf017 {:%H:%M}",
         "tooltip": false
     },
 
     "clock#date": {
       "interval": 120,
-      "format": "  {:%e %b %Y}", // Icon: calendar-alt
+      "format": "\uf133 {:%e %b %Y}", // Icon: calendar-alt
       "tooltip-format": "{:%e %B %Y}"
     },
 
     "cpu": {
-        "interval": 5,
-        "format": "  {usage}%", // Icon: microchip
+        "interval": 60,
+        "format": "\uf2db {usage}%", // Icon: microchip
         "states": {
           "warning": 70,
           "critical": 90
@@ -96,8 +97,8 @@
     },
 
     "memory": {
-        "interval": 5,
-        "format": "  {}%", // Icon: memory
+        "interval": 60,
+        "format": "\uf538  {}%", // Icon: memory
         "states": {
             "warning": 70,
             "critical": 90
@@ -110,7 +111,7 @@
         "format-ethernet": "  {ipaddr}/{cidr}", // Icon: ethernet
         "format-disconnected": "⚠  Disconnected",
         "tooltip-format": "{ifname}: {ipaddr}",
-        "on-click": "alacritty --class nmtui -e nmtui" //"~/dev/wifimenu/wifimenu"
+        "on-click": "networkmanager_dmenu"//"alacritty --class nmtui -e nmtui" //"~/dev/wifimenu/wifimenu"
     },
 
     "sway/mode": {
@@ -166,21 +167,23 @@
     },
 
     "temperature": {
+      "hwmon-path-abs": "/sys/devices/platform/coretemp.0/hwmon",
+      "input-filename": "temp1_input",
       "critical-threshold": 80,
-      "interval": 5,
+      "interval": 60,
       "format": "{icon}  {temperatureC}°C",
       "format-icons": [
-          "", // Icon: temperature-empty
-          "", // Icon: temperature-quarter
-          "", // Icon: temperature-half
-          "", // Icon: temperature-three-quarters
-          ""  // Icon: temperature-full
+          "\uf2cb", // Icon: temperature-empty
+          "\uf2ca", // Icon: temperature-quarter
+          "\uf2c9", // Icon: temperature-half
+          "\uf2c8", // Icon: temperature-three-quarters
+          "\uf2c7"  // Icon: temperature-full
       ],
       "tooltip": true
     },
 
     "tray": {
-        "icon-size": 21,
+        "icon-size": 16,
         "spacing": 10
     },
 
@@ -189,10 +192,16 @@
         "format": " {percent}%",
     },
 
-    "bluetooth": {
-        "format": "",
-        "on-click": "blueman-manager"
-    },
+  "bluetooth": {
+        "format": "",  //<-- Old one
+        //"format": "󰂯",    // <-- New one
+        "format-disabled": "󰂲", // Optional: Show a different icon when off
+        "format-connected": " {device_alias}", // Optional: Show device name when connected
+        "on-click": "blueman-manager",
+        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
+    },    
 
     "custom/wlogout": {
         "format": "",  // Power symbol icon

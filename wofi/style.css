@@ -1,65 +1,64 @@
 /* Base window styling */
 window {
-    font-family: Cantarell, sans-serif;
-    margin: 0px;
-    border: none;
-    background-color: rgba(15, 15, 15, 0.9);
-    border-radius: 0px;
+  font-family: "MeslonLGS NF", sans-serif;
+  margin: 0px;
+  border: none;
+  background-color: rgba(15, 15, 15, 1);
+  border-radius: 0px;
 }
 
 /* Search input box */
 #input {
-    margin: 10px;
-    padding: 10px;
-    border: none;
-    border-radius: 0px;
-    color: #ffffff;
-    background-color: rgba(32, 32, 32, 0.9);
-    font-size: 16px;
-    outline: none;
+  margin: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 0px;
+  color: #ffffff;
+  background-color: rgba(32, 32, 32, 1);
+  font-size: 16px;
+  outline: none;
 }
 
 #input:focus {
-    box-shadow: 0 0 0 2px rgba(225,37,27, 0.9);
+  box-shadow: 0 0 0 2px rgba(225, 37, 27, 1);
 }
 /* Inner content area */
 #inner-box {
-    margin: 10px;
-    border: none;
-    background-color: transparent;
+  margin: 10px;
+  border: none;
+  background-color: transparent;
 }
 
 /* Entries (apps/options) */
 #entry {
-    padding: 8px;
-    border-radius: 0px;
-    color: #ffffff;
-    background-color: transparent;
+  padding: 8px;
+  border-radius: 0px;
+  color: #ffffff;
+  background-color: transparent;
 }
 
 expander > list {
-    background-color: rgba(15, 15, 15, 0.9);
+  background-color: rgba(15, 15, 15, 1);
 }
 
 #entry:selected {
-    background-color: rgba(225,37,27, 0.9);
-    color: #ffffff;
-    border-radius: 0px;
+  background-color: rgba(225, 37, 27, 1);
+  color: #ffffff;
+  border-radius: 0px;
 }
 
 /* Text styling */
 #text {
-    margin: 5px;
-    color: #ffffff;
+  margin: 5px;
+  color: #ffffff;
 }
 
 /* Scrollbar (optional) */
 #scroll {
-    margin: 0px;
-    border: none;
+  margin: 0px;
+  border: none;
 }
 scrollbar {
-    border: none;
-    background-color: transparent
+  border: none;
+  background-color: transparent;
 }
-

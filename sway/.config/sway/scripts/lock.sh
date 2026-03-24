@@ -1,10 +1,9 @@
 #!/bin/sh
 
-AC_PATH="/sys/class/power_supply/AC/online"
+COUNT=$(swaymsg -t get_outputs | jq 'length')
 
 # Only lock when running on battery
-if [ -f "$AC_PATH" ] && [ "$(cat "$AC_PATH")" = "0" ]; then
-    
+if [ "$COUNT" -eq 1 ]; then 
     swaymsg output eDP-1 enable
 
     swaylock \
@@ -21,8 +20,6 @@ if [ -f "$AC_PATH" ] && [ "$(cat "$AC_PATH")" = "0" ]; then
       --line-color 00000000 \
       --inside-color 00000088 \
       --separator-color 00000000 \
-      --grace 2 \
       --fade-in 0.2 \
       --daemonize
 fi
-

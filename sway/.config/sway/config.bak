@@ -1,0 +1,197 @@
+# ==============================================================================
+#  Sway Configuration - ThinkPad L14 Gen 4
+# ==============================================================================
+### Variables
+set $mod Mod4
+set $left h
+set $down j
+set $up k
+set $right l
+set $term alacritty
+set $menu wofi --show drun --style ~/.config/wofi/style.css
+set $lock ~/.config/sway/scripts/lock.sh
+set $suspend ~/.config/sway/scripts/suspend.sh
+
+
+# Colors
+set $color_focus #e1251b
+set $color_unfocus #333333
+
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
+# Start UI elements
+exec waybar
+exec mako
+exec easyeffects --gapplication-service
+exec swayosd-server
+exec nm-applet --indicator
+
+### Output configuration
+output DP-2 mode 3440x1440@120.00Hz pos 0 0
+output eDP-1 pos 0 1440
+# Clamshell Mode
+bindswitch lid:on output eDP-1 disable
+bindswitch lid:off output eDP-1 enable
+
+# Wallpaper
+output * bg ~/Pictures/1657003.png fill
+
+### Idle configuration
+exec swayidle -w \
+    timeout 120 $lock \
+    timeout 300 $suspend \
+    before-sleep $lock
+
+### Input configuration
+
+# 1. Keyboard Layout
+input type:keyboard {
+    xkb_layout us
+    xkb_variant intl
+}
+
+# 2. TrackPoint (The Red Nub) - Flat profile for precision
+input type:pointer {
+    accel_profile flat
+    pointer_accel 0
+}
+
+# 3. Touchpad - Natural scrolling and tap to click
+input "10182:480:GXTP5100:00_27C6:01E0_Touchpad" {
+    dwt enabled
+    tap enabled
+    natural_scroll enabled
+    middle_emulation enabled
+    accel_profile adaptive
+    drag enabled
+    drag_lock disabled
+}
+
+### Key bindings
+
+# Basics
+bindsym $mod+Return exec $term
+bindsym $mod+q kill
+bindsym $mod+d exec $menu
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+e exec swaynag -t warning -m 'Exit Sway?' -B 'Yes, exit sway' 'swaymsg exit'
+
+# Screenshots (Grim + Slurp)
+bindsym Print exec ~/.config/sway/scripts/screenshot.sh
+bindsym $mod+p exec ~/.config/sway/scripts/screenshot.sh
+
+# Navigation
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Moving Windows
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+# Workspaces
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
+# Layouts
+bindsym $mod+b splith
+bindsym $mod+v splitv
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+f fullscreen
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+bindsym $mod+a focus parent
+
+# Scratchpad
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+# Resize Mode
+mode "resize" {
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Sink volume raise optionally with --device
+bindsym XF86AudioRaiseVolume exec swayosd-client --output-volume raise
+# Sink volume lower optionally with --device
+bindsym XF86AudioLowerVolume exec  swayosd-client --output-volume lower
+# Sink volume toggle mute
+bindsym XF86AudioMute exec swayosd-client --output-volume mute-toggle
+# Source volume toggle mute
+bindsym XF86AudioMicMute exec swayosd-client --input-volume mute-toggle
+
+
+# Brightness
+bindsym XF86MonBrightnessUp   exec swayosd-client --brightness raise
+bindsym XF86MonBrightnessDown exec swayosd-client --brightness lower
+
+# Keyboard backlight
+bindsym XF86KbdBrightnessUp exec swayosd-client --kbd-backlight raise
+bindsym XF86KbdBrightnessDown exec swayosd-client --kbd-backlight lower
+
+
+# Display Settings
+bindsym XF86Display exec nwg-displays
+
+# Borders
+default_border pixel 2
+default_floating_border pixel 2
+hide_edge_borders smart
+smart_gaps on
+gaps inner 10
+gaps outer 0
+
+# Class colors
+client.focused          $color_focus $color_focus #FFFFFF $color_focus
+
+# Window Rules
+for_window [app_id="blueman-manager"] floating enable, move position 75% 0%, resize set width 30% height 40%
+for_window [app_id="org.pulseaudio.pavucontrol"] floating enable, move position 75% 0%, resize set width 30% height 40%
+for_window [app_id="nwg-displays"] floating enable, move position 75% 0%, resize set width 30% height 40%
+for_window [app_id="nmtui"] floating enable, move position 75% 0%, resize set width 30% height 40%
+for_window [app_id="com.github.wwmm.easyeffects"] floating enable
+
+# Inhibit idle for fullscreen apps (e.g. YouTube, Games)
+for_window [app_id=".*"] inhibit_idle fullscreen
+for_window [class=".*"] inhibit_idle fullscreen
+
+# Workspace Assignments
+workspace 1 output DP-2 eDP-1
+workspace 2 output DP-2 eDP-1
+
+include /etc/sway/config.d/*

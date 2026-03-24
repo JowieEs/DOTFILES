@@ -8,7 +8,7 @@ background-color=#222222
 
 # Text color (white for contrast)
 text-color=#ffffff
-font=Cantarell 11
+font=MesloLGS NF 11, Noto Color Emoji 11
 
 # Accent color (border, progress bar, etc.)
 border-color=#e1251b
@@ -18,3 +18,4 @@ border-size=2
 padding=10
 margin=10
 
+on-button-left=invoke-default-action

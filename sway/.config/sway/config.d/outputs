@@ -1,0 +1,14 @@
+# ==============================================================================
+#  Output Configuration
+# ==============================================================================
+
+# Wallpaper
+output * bg ~/Pictures/1657003.png fill
+
+# Check lid state on startup/reload
+exec_always $HOME/.config/sway/scripts/clamshell.sh init
+
+# Clamshell Mode (Event Listeners)
+bindswitch --reload --locked lid:on exec $HOME/.config/sway/scripts/clamshell.sh lid_closed
+
+bindswitch --reload --locked lid:off exec $HOME/.config/sway/scripts/clamshell.sh lid_opened

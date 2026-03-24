@@ -1,14 +1,11 @@
 return {
-  {
-    "EdenEast/nightfox.nvim",
-    priority = 1000,
-    config = function()
-        require("nightfox").setup({
-        options = {
-          transparent = true,
-        }
-      })
-      vim.cmd("colorscheme nightfox")
-    end
-  }
+	{
+		"blazkowolf/gruber-darker.nvim",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			vim.opt.termguicolors = true
+			vim.cmd.colorscheme("gruber-darker")
+		end,
+	},
 }

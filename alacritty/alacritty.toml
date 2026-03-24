@@ -1,20 +1,11 @@
-#[general]
-#import = [
-#  "/home/joel/.config/alacritty/themes/themes/nightfox.toml"
-#]
-
 [env]
 TERM = "xterm-256color"
 
 [window]
-opacity = 0.85
 dynamic_padding = true
-  [window.padding]
-  x = 5
-  y = 5
-
-[colors]
-primary = { background = "0x0f0f0f"}
+[window.padding]
+x = 5
+y = 5
 
 [cursor]
 style = "Beam"
@@ -22,27 +13,20 @@ style = "Beam"
 [font]
 size = 11
 
-  [font.normal]
-  family = "MesloLGS Nerd Font Mono"
-  style = "Regular"
+[font.normal]
+family = "MesloLGS NF"
+style = "Regular"
 
-  [font.bold]
-  family = "MesloLGS Nerd Font Mono"
-  style = "Bold"
+[font.bold]
+family = "MesloLGS NF"
+style = "Bold"
 
-  [font.italic]
-  family = "MesloLGS Nerd Font Mono"
-  style = "Italic"
+[font.italic]
+family = "MesloLGS NF"
+style = "Italic"
 
 [mouse]
 hide_when_typing = true
 
-[[keyboard.bindings]]
-key = "V"
-mods = "Control|Shift"
-action = "Paste"
-
-[[keyboard.bindings]]
-key = "C"
-mods = "Control|Shift"
-action = "Copy"
+[general]
+import = ["~/.config/alacritty/themes/themes/gruber_darker.toml"]

@@ -1,13 +1,19 @@
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.syntax = 'on'
+vim.cmd("syntax off")
+
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
-vim.o.termguicolors = true
-vim.g.transparent_enabled = true
+vim.opt.showmode = false
+vim.opt.termguicolors = true
 
--- Disable netrw
+vim.opt.laststatus = 3
+vim.o.list = true
+vim.o.listchars = "tab:» ,lead:•,trail:•"
+
+vim.opt.wrap = false
+
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
