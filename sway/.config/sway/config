@@ -8,7 +8,7 @@ set $down j
 set $up k
 set $right l
 set $term footclient
-set $menu footclient -a launcher sway-launcher-desktop
+set $menu footclient -a launcher -e ~/.config/sway/scripts/launcher.sh
 #set $menu wofi --show drun --style ~/.config/wofi/style.css
 
 ### Key bindings
@@ -17,7 +17,8 @@ bindsym $mod+Return exec $term
 bindsym $mod+q kill
 bindsym $mod+d exec $menu
 bindsym $mod+Shift+c reload
-bindsym $mod+Shift+e exec swaynag -t warning -m 'Exit Sway?' -B 'Yes, exit sway' 'swaymsg exit'
+bindsym $mod+Shift+e exec footclient -a powermenu -e ~/.config/sway/scripts/powermenu.sh
+#bindsym $mod+Shift+e exec swaynag -t warning -m 'Exit Sway?' -B 'Yes, exit sway' 'swaymsg exit'
 
 # Screenshots (Grim + Slurp)
 bindsym Print exec ~/.config/sway/scripts/screenshot.sh
@@ -91,16 +92,19 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-# Hardware Controls (Volume/Brightness via swayosd)
-bindsym XF86AudioRaiseVolume exec swayosd-client --output-volume raise
-bindsym XF86AudioLowerVolume exec  swayosd-client --output-volume lower
-bindsym XF86AudioMute exec swayosd-client --output-volume mute-toggle
-bindsym XF86AudioMicMute exec swayosd-client --input-volume mute-toggle
-bindsym XF86MonBrightnessUp   exec swayosd-client --brightness raise
-bindsym XF86MonBrightnessDown exec swayosd-client --brightness lower
-bindsym XF86KbdBrightnessUp exec swayosd-client --kbd-backlight raise
-bindsym XF86KbdBrightnessDown exec swayosd-client --kbd-backlight lower
+# Volume (Using wpctl - limits max volume to 100% to protect speakers)
+bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.0
+bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bindsym XF86AudioMute        exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindsym XF86AudioMicMute     exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
 
+# Screen Brightness (Using brightnessctl)
+bindsym XF86MonBrightnessUp   exec brightnessctl set 5%+
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%- --min-value=5%
+
+# Keyboard Backlight (Using brightnessctl)
+bindsym XF86KbdBrightnessUp   exec brightnessctl -d *kbd* set 1+
+bindsym XF86KbdBrightnessDown exec brightnessctl -d *kbd* set 1-
 # Display Settings
 bindsym XF86Display exec nwg-displays
 
@@ -108,9 +112,9 @@ bindsym XF86Display exec nwg-displays
 for_window [app_id="blueman-manager"] floating enable, move position 75% 0%, resize set width 30% height 40%
 for_window [app_id="org.pulseaudio.pavucontrol"] floating enable, move position 75% 0%, resize set width 30% height 40%
 for_window [app_id="nwg-displays"] floating enable, move position 75% 0%, resize set width 30% height 40%
-for_window [app_id="nmtui"] floating enable, move position 75% 0%, resize set width 30% height 40%
 for_window [app_id="com.github.wwmm.easyeffects"] floating enable
-for_window [app_id="^launcher$"] floating enable, sticky enable, move position center, resize set 30 ppt 60 ppt
+for_window [app_id="launcher"] floating enable, sticky enable, move position center, resize set 400 px 500 px
+for_window [app_id="powermenu"] floating enable, sticky enable, move position center, resize set 200 px 200 px
 
 # Inhibit idle for fullscreen apps (e.g. YouTube, Games)
 for_window [app_id=".*"] inhibit_idle fullscreen
@@ -119,5 +123,5 @@ for_window [class=".*"] inhibit_idle fullscreen
 
 include /etc/sway/config.d/*
 include $HOME/.config/sway/config.d/*
-include $HOME/.config/sway/outputs
-include $HOME/.config/sway/workspaces
+#include $HOME/.config/sway/outputs
+#include $HOME/.config/sway/workspaces

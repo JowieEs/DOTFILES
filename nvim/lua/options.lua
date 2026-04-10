@@ -15,5 +15,7 @@ vim.o.listchars = "tab:» ,lead:•,trail:•"
 
 vim.opt.wrap = false
 
+vim.api.nvim_set_hl(0, "CodeiumSuggestion", { link = "Comment", default = true })
+
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1

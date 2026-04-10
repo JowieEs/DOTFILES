@@ -5,10 +5,10 @@
 # Wallpaper
 output * bg ~/Pictures/1657003.png fill
 
-# Check lid state on startup/reload
-exec_always $HOME/.config/sway/scripts/clamshell.sh init
+output DP-2 {
+  mode 3440x1440@120.000Hz
+}
 
-# Clamshell Mode (Event Listeners)
-bindswitch --reload --locked lid:on exec $HOME/.config/sway/scripts/clamshell.sh lid_closed
-
-bindswitch --reload --locked lid:off exec $HOME/.config/sway/scripts/clamshell.sh lid_opened
+exec_always ~/.config/sway/scripts/clamshell-reloadfix.sh
+bindswitch --reload --locked lid:on output eDP-1 disable
+bindswitch --reload --locked lid:off output eDP-1 enable

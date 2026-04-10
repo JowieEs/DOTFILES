@@ -18,4 +18,8 @@ border-size=2
 padding=10
 margin=10
 
+# Left-click executes the default action (if one exists) or dismisses
 on-button-left=invoke-default-action
+
+# Middle-click executes the first custom action (usually "Accept")
+on-button-middle=invoke-action accept

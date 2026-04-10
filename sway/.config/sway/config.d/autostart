@@ -10,24 +10,21 @@ exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 # Audio effects (runs in background)
 exec easyeffects --gapplication-service
 
-# On-screen display server (volume/brightness popups)
-exec swayosd-server
-
 # Start the Polkit authentication agent
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
-# --- User Interface ---
-# Network Manager Applet (system tray icon)
-exec nm-applet --indicator
 
 # Status Bar
 exec waybar
 
 # Notification Daemon
-exec swaync
+exec mako
 
 # Foot server
 exec foot --server
+
+# Display Managment
+exec_always pkill kanshi; exec kanshi
 
 # Idle configuration
 set $lock ~/.config/sway/scripts/lock.sh

@@ -23,5 +23,8 @@ fi
 
 alias upclink='sudo openfortivpn myupclink.upc.edu:443 --saml-login'
 alias upclink-disconnect='sudo pkill openfortivpn && echo "UPCLink disconnected"'
+alias gitClean="git branch -vv | grep ': gone]' | awk '{if (\$1 == \"*\") print \$2; else print \$1}' | xargs -r git branch -d"
+
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH=$PATH:$(go env GOPATH)/bin
 export EDITOR="nvim"

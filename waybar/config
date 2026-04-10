@@ -7,11 +7,11 @@
 // =============================================================================
 
 {
-    // -------------------------------------------------------------------------
-    // Global configuration
-    // -------------------------------------------------------------------------
+  // -------------------------------------------------------------------------
+  // Global configuration
+  // -------------------------------------------------------------------------
 
-    "layer": "top",
+  "layer": "top",
 
     "position": "top",
 
@@ -19,56 +19,56 @@
     "height": 30,
 
     "modules-left": [
-        "sway/workspaces",
-        "sway/mode"
+      "sway/workspaces",
+    "sway/mode"
     ],
     "modules-center": [
-        //"sway/window",
-        "clock#date",
-        "clock#time",
+      //"sway/window",
+      "clock#date",
+    "clock#time",
     ],
     "modules-right": [
-      // "network",
-      "pulseaudio",
-      "battery",
-      "memory",
       "cpu",
-      "temperature",
-      "backlight",
-      "bluetooth",
-      "tray",
-      "custom/wlogout",
+    "memory",
+    "temperature",
+    "backlight",
+    "pulseaudio",
+    "bluetooth",
+    "network",
+    "network#vpn",
+    "battery",
+    "tray",
+    "custom/wlogout"
     ],
-
 
     // -------------------------------------------------------------------------
     // Modules
     // -------------------------------------------------------------------------
 
     "battery": {
-        "interval":60,
-        "states": {
-            "warning": 30,
-            "critical": 15
-        },
-        // Connected to AC
-        "format": "\uf1e6 {capacity}%", // Icon: bolt
-        // Not connected to AC
-        "format-discharging": "{icon} {capacity}%",
-        "format-icons": [
-            "", // Icon: battery-full
-            "", // Icon: battery-three-quarters
-            "", // Icon: battery-half
-            "", // Icon: battery-quarter
-            ""  // Icon: battery-empty
-        ],        
-        "tooltip": true
+      "interval":60,
+      "states": {
+        "warning": 30,
+        "critical": 15
+      },
+      // Connected to AC
+      "format": "\uf1e6 {capacity}%", // Icon: bolt
+                                      // Not connected to AC
+      "format-discharging": "{icon} {capacity}%",
+      "format-icons": [
+        "", // Icon: battery-full
+      "", // Icon: battery-three-quarters
+      "", // Icon: battery-half
+      "", // Icon: battery-quarter
+      ""  // Icon: battery-empty
+      ],        
+      "tooltip": true
     },
 
     "clock#time": {
-        "interval": 60,
-        "format": "\uf017 {:%H:%M}",
-        "tooltip": false
+      "interval": 60,
+      "format": "\uf017 {:%H:%M}",
+      "tooltip": false
     },
 
     "clock#date": {
@@ -78,12 +78,12 @@
     },
 
     "cpu": {
-        "interval": 60,
-        "format": "\uf2db {usage}%", // Icon: microchip
-        "states": {
-          "warning": 70,
-          "critical": 90
-        }
+      "interval": 60,
+      "format": "\uf2db {usage}%", // Icon: microchip
+      "states": {
+        "warning": 70,
+        "critical": 90
+      }
     },
 
     "custom/keyboard-layout": {
@@ -91,79 +91,84 @@
       // Interval set only as a fallback, as the value is updated by signal
       "interval": 30,
       "format": "  {}", // Icon: keyboard
-      // Signal sent by Sway key binding (~/.config/sway/key-bindings)
+                         // Signal sent by Sway key binding (~/.config/sway/key-bindings)
       "signal": 1, // SIGHUP
       "tooltip": false
     },
 
     "memory": {
-        "interval": 60,
-        "format": "\uf538  {}%", // Icon: memory
-        "states": {
-            "warning": 70,
-            "critical": 90
-        }
+      "interval": 60,
+      "format": "\uf538  {}%", // Icon: memory
+      "states": {
+        "warning": 70,
+        "critical": 90
+      }
     },
 
     "network": {
-        "interval": 30,
-        "format-wifi": "  {essid}", // Icon: wifi
-        "format-ethernet": "  {ipaddr}/{cidr}", // Icon: ethernet
-        "format-disconnected": "⚠  Disconnected",
-        "tooltip-format": "{ifname}: {ipaddr}",
-        "on-click": "networkmanager_dmenu"//"alacritty --class nmtui -e nmtui" //"~/dev/wifimenu/wifimenu"
+      "interval": 30,
+      "format-wifi": "  {essid}", // Icon: wifi
+      "format-ethernet": "  {ipaddr}/{cidr}", // Icon: ethernet
+      "format-disconnected": "⚠  Disconnected",
+      "tooltip-format": "{ifname}: {ipaddr}",
+      //"on-click": "networkmanager_dmenu"//"alacritty --class nmtui -e nmtui" //"~/dev/wifimenu/wifimenu"
     },
-
+    "network#vpn": {
+      "interface": "ppp0",
+      "format": "  UPC",
+      "format-disconnected": "",
+      "tooltip-format": "{ipaddr}"
+    },
     "sway/mode": {
-        "format": "<span style=\"italic\">  {}</span>", // Icon: expand-arrows-alt
-        "tooltip": false
+      "format": "<span style=\"italic\">  {}</span>", // Icon: expand-arrows-alt
+      "tooltip": false
     },
 
     "sway/window": {
-        "format": "{}",
-        "max-length": 120
+      "format": "{}",
+      "max-length": 120
     },
 
     "sway/workspaces": {
-        "all-outputs": false,
-        "disable-scroll": true,
-        "format": "{icon} {name}",
-        "format-icons": {
-            "1:www": "龜", // Icon: firefox-browser
-            "2:mail": "", // Icon: mail
-            "3:editor": "", // Icon: code
-            "4:terminals": "", // Icon: terminal
-            "5:portal": "", // Icon: terminal
-            "urgent": "",
-            "focused": "",
-            "default": ""
-        }
+      "all-outputs": false,
+      "disable-scroll": true,
+      "format": "{icon} {name}",
+      "format-icons": {
+        "1:www": "龜", // Icon: firefox-browser
+        "2:mail": "", // Icon: mail
+        "3:editor": "", // Icon: code
+        "4:terminals": "", // Icon: terminal
+        "5:portal": "", // Icon: terminal
+        "urgent": "",
+        "focused": "",
+        "default": ""
+      }
     },
     "custom/volume": {
-        "exec": "~/.config/waybar/scripts/volume-wpctl.sh",
-        "interval": 0,
-        "format": "{}",
-        "on-click": "swayosd-client --output-volume --toggle-mute"
+      "exec": "~/.config/waybar/scripts/volume-wpctl.sh",
+      "interval": 0,
+      "format": "{}",
+      //"on-click": "swayosd-client --output-volume --toggle-mute"
     },
 
     "pulseaudio": {
-        //"scroll-step": 1,
-        "format": "{icon}  {volume}%",
-        "format-bluetooth": "{icon}  {volume}%",
-        "format-muted": "",
-        "format-icons": {
-            "headphones": "",
-            "handsfree": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", ""]
-        },
-        "on-click" : "pavucontrol",
-        "on-scroll-down" : "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+ -l 1",
-        "on-scroll-up" : "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-",
-        "tooltip": false,
+      //"scroll-step": 1,
+      "format": "{icon}  {volume}%",
+      "format-bluetooth": "{icon}  {volume}%",
+      "format-muted": "",
+      "format-icons": {
+        "headphones": "",
+        "handsfree": "",
+        "headset": "",
+        "phone": "",
+        "portable": "",
+        "car": "",
+        "default": ["", ""]
+      },
+      "on-click" : "pavucontrol",
+      "on-scroll-down" : "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+ -l 1",
+      "on-scroll-up" : "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-",
+      "tooltip": false,
     },
 
     "temperature": {
@@ -173,39 +178,39 @@
       "interval": 60,
       "format": "{icon}  {temperatureC}°C",
       "format-icons": [
-          "\uf2cb", // Icon: temperature-empty
-          "\uf2ca", // Icon: temperature-quarter
-          "\uf2c9", // Icon: temperature-half
-          "\uf2c8", // Icon: temperature-three-quarters
-          "\uf2c7"  // Icon: temperature-full
+        "\uf2cb", // Icon: temperature-empty
+      "\uf2ca", // Icon: temperature-quarter
+      "\uf2c9", // Icon: temperature-half
+      "\uf2c8", // Icon: temperature-three-quarters
+      "\uf2c7"  // Icon: temperature-full
       ],
       "tooltip": true
     },
 
     "tray": {
-        "icon-size": 16,
-        "spacing": 10
+      "icon-size": 16,
+      "spacing": 10
     },
 
     "backlight": {
-        "device": "intel_backlight",
-        "format": " {percent}%",
+      "device": "intel_backlight",
+      "format": " {percent}%",
     },
 
-  "bluetooth": {
-        "format": "",  //<-- Old one
-        //"format": "󰂯",    // <-- New one
-        "format-disabled": "󰂲", // Optional: Show a different icon when off
-        "format-connected": " {device_alias}", // Optional: Show device name when connected
-        "on-click": "blueman-manager",
-        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
-        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
-        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
+    "bluetooth": {
+      "format": "",  //<-- Old one
+                      //"format": "󰂯",    // <-- New one
+      "format-disabled": "󰂲", // Optional: Show a different icon when off
+      "format-connected": " {device_alias}", // Optional: Show device name when connected
+                                              //"on-click": "footclient -a bluetui -e bluetui",     
+      "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+      "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+      "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
     },    
 
     "custom/wlogout": {
-        "format": "",  // Power symbol icon
-        "on-click": "wlogout --protocol layer-shell",
-        "tooltip": false
+      "format": "",  // Power symbol icon
+      "on-click": "footclient -a powermenu -e ~/.config/sway/scripts/powermenu.sh",
+      "tooltip": false
     }
 }

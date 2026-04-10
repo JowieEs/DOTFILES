@@ -1,16 +1,10 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		lazy = false, -- The docs explicitly say: "This plugin does not support lazy-loading."
 		build = ":TSUpdate",
+		lazy = false,
 		config = function()
-			local ts = require("nvim-treesitter")
-
-			ts.setup({
-				install_dir = vim.fn.stdpath("data") .. "/site",
-			})
-
-			ts.install({
+			require("nvim-treesitter").install({
 				"lua",
 				"typescript",
 				"tsx",
@@ -26,7 +20,14 @@ return {
 				"zsh",
 				"javascript",
 				"toml",
+				"yaml",
 				"bash",
+				"zig",
+				"git_rebase",
+				"git_config",
+				"gitattributes",
+				"gitignore",
+				"markdown",
 			})
 		end,
 	},

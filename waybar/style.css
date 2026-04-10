@@ -148,6 +148,11 @@
 #network.disconnected {
   color: orange;
 }
+#network.vpn.disconnected {
+  padding: 0px;
+  margin: 0px;
+  min-width: 0px;
+}
 
 #pulseaudio {
   /* No styles */
