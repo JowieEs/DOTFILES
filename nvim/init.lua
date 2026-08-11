@@ -15,6 +15,14 @@ vim.api.nvim_create_autocmd("FileType", {
 		pcall(vim.treesitter.start, ev.buf)
 	end,
 })
+vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI", "InsertLeave", "TextChanged" }, {
+	pattern = "*.rs",
+	callback = function()
+		if vim.bo.modified then
+			vim.cmd("silent! write")
+		end
+	end,
+})
 vim.g.mapleader = " "
 require("options")
 require("keymaps")

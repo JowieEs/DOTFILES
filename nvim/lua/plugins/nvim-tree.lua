@@ -2,20 +2,23 @@ return {
 	{
 		"nvim-tree/nvim-tree.lua",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		config = function()
-			require("nvim-tree").setup({
-				filters = {
-					custom = {
-						"^.git$",
-						"^node_modules$",
-						"^.vscode$",
-					},
-					dotfiles = false,
+		opts = {
+			view = {
+				adaptive_size = true,
+				width = 30,
+			},
+
+			filters = {
+				custom = {
+					"^.git$",
+					"^node_modules$",
+					"^.vscode$",
 				},
-				git = {
-					ignore = true,
-				},
-			})
-		end,
+				dotfiles = false,
+			},
+			git = {
+				ignore = true,
+			},
+		},
 	},
 }

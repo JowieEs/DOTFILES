@@ -7,9 +7,12 @@ set $left h
 set $down j
 set $up k
 set $right l
-set $term footclient
-set $menu footclient -a launcher -e ~/.config/sway/scripts/launcher.sh
-#set $menu wofi --show drun --style ~/.config/wofi/style.css
+#set $term footclient
+set $term kitty -1
+set $menu wofi
+#set $menu footclient -a launcher -e ~/.config/sway/scripts/launcher.sh
+#set $menu wmenu-run -f 'BlexMono Nerd Font 11' -N 000000 -n ffffff -S e1251b -s ffffff
+#set $menu j4-dmenu-desktop --dmenu="bemenu -b -i -p '' -W 0.27 --fn 'BlexMono Nerd Font 11' --tb '#000000' --tf '#ffffff' --fb '#000000' --ff '#ffffff' --nb '#000000' --nf '#ffffff' --hb '#e1251b' --hf '#ffffff'"
 
 ### Key bindings
 # Basics
@@ -17,7 +20,7 @@ bindsym $mod+Return exec $term
 bindsym $mod+q kill
 bindsym $mod+d exec $menu
 bindsym $mod+Shift+c reload
-bindsym $mod+Shift+e exec footclient -a powermenu -e ~/.config/sway/scripts/powermenu.sh
+bindsym $mod+Shift+e exec kitty -1 --class powermenu -e ~/.config/sway/scripts/powermenu.sh
 #bindsym $mod+Shift+e exec swaynag -t warning -m 'Exit Sway?' -B 'Yes, exit sway' 'swaymsg exit'
 
 # Screenshots (Grim + Slurp)
@@ -26,6 +29,9 @@ bindsym $mod+p exec ~/.config/sway/scripts/screenshot.sh
 
 # Screen Recording (wf-recorder + Slurp)
 bindsym $mod+Shift+r exec ~/.config/sway/scripts/record-screen.sh
+
+# Screen Mirroring (wf-mirror)
+bindsym $mod+Shift+XF86Display exec wl-mirror eDP-1
 
 # Navigation
 bindsym $mod+$left focus left
@@ -92,19 +98,16 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-# Volume (Using wpctl - limits max volume to 100% to protect speakers)
-bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.0
-bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
-bindsym XF86AudioMute        exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-bindsym XF86AudioMicMute     exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+# Volume (Using swayosd - limits max volume to 100% to protect speakers)
+bindsym XF86AudioRaiseVolume exec swayosd-client --output-volume +5 --max-volume 100
+bindsym XF86AudioLowerVolume exec swayosd-client --output-volume -5
+bindsym XF86AudioMute        exec swayosd-client --output-volume mute-toggle
+bindsym XF86AudioMicMute     exec swayosd-client --input-volume mute-toggle
 
-# Screen Brightness (Using brightnessctl)
-bindsym XF86MonBrightnessUp   exec brightnessctl set 5%+
-bindsym XF86MonBrightnessDown exec brightnessctl set 5%- --min-value=5%
+# Screen Brightness (Using swayosd)
+bindsym XF86MonBrightnessUp   exec swayosd-client --brightness +5
+bindsym XF86MonBrightnessDown exec swayosd-client --brightness -5
 
-# Keyboard Backlight (Using brightnessctl)
-bindsym XF86KbdBrightnessUp   exec brightnessctl -d *kbd* set 1+
-bindsym XF86KbdBrightnessDown exec brightnessctl -d *kbd* set 1-
 # Display Settings
 bindsym XF86Display exec nwg-displays
 
@@ -121,7 +124,8 @@ for_window [app_id=".*"] inhibit_idle fullscreen
 for_window [class=".*"] inhibit_idle fullscreen
 
 
+
 include /etc/sway/config.d/*
 include $HOME/.config/sway/config.d/*
-#include $HOME/.config/sway/outputs
+include $HOME/.config/sway/outputs
 #include $HOME/.config/sway/workspaces

@@ -3,10 +3,14 @@
 # ==============================================================================
 
 # Wallpaper
-output * bg ~/Pictures/1657003.png fill
+output * bg ~/Pictures/vilabackground.png fill
 
 output DP-2 {
   mode 3440x1440@120.000Hz
+}
+
+output eDP-1 {
+  mode 1920x1080@48.008Hz
 }
 
 exec_always ~/.config/sway/scripts/clamshell-reloadfix.sh

@@ -28,6 +28,11 @@ return {
 				"gitattributes",
 				"gitignore",
 				"markdown",
+				"sql",
+				"dockerfile",
+				"kotlin",
+				"latex",
+				"templ",
 			})
 		end,
 	},

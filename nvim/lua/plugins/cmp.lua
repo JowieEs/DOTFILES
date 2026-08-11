@@ -6,8 +6,9 @@ return {
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
-			"L3MON4D3/LuaSnip", -- Required for many LSP completions
+			"L3MON4D3/LuaSnip",
 			"saadparwaiz1/cmp_luasnip",
+			"windwp/nvim-autopairs", -- Added as a dependency so it loads in the right order
 		},
 		config = function()
 			local cmp = require("cmp")
@@ -28,8 +29,8 @@ return {
 					["<C-u>"] = cmp.mapping.scroll_docs(-4),
 					["<C-d>"] = cmp.mapping.scroll_docs(4),
 
-					["<C-Space>"] = cmp.mapping.complete(), -- Manually trigger menu
-					["<C-e>"] = cmp.mapping.abort(), -- Close menu
+					["<C-Space>"] = cmp.mapping.complete(),
+					["<C-e>"] = cmp.mapping.abort(),
 
 					["<CR>"] = cmp.mapping.confirm({ select = true }),
 
@@ -38,12 +39,21 @@ return {
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
-					{ name = "luasnip" }, -- Add snippets to the list
+					{ name = "luasnip" },
 					{ name = "path" },
 				}, {
 					{ name = "buffer" },
 				}),
 			})
+
+			-- =========================================================
+			-- THE BRIDGE: Tell cmp to trigger autopairs after confirming
+			-- =========================================================
+			local cmp_autopairs_setup, cmp_autopairs =
+				pcall(require, "nvim-autopairs.completion.cmp")
+			if cmp_autopairs_setup then
+				cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+			end
 		end,
 	},
 }

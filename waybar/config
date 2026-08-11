@@ -16,7 +16,6 @@
     "position": "top",
 
     // If height property would be not present, it'd be calculated dynamically
-    "height": 30,
 
     "modules-left": [
       "sway/workspaces",
@@ -73,7 +72,7 @@
 
     "clock#date": {
       "interval": 120,
-      "format": "\uf133 {:%e %b %Y}", // Icon: calendar-alt
+      "format": "\uf133{:%e %b %Y}", // Icon: calendar-alt
       "tooltip-format": "{:%e %B %Y}"
     },
 
@@ -98,7 +97,7 @@
 
     "memory": {
       "interval": 60,
-      "format": "\uf538  {}%", // Icon: memory
+      "format": "\uf538 {}%", // Icon: memory
       "states": {
         "warning": 70,
         "critical": 90
@@ -107,15 +106,15 @@
 
     "network": {
       "interval": 30,
-      "format-wifi": "  {essid}", // Icon: wifi
-      "format-ethernet": "  {ipaddr}/{cidr}", // Icon: ethernet
-      "format-disconnected": "⚠  Disconnected",
+      "format-wifi": "  {essid:.10}", // Icon: wifi
+      "format-ethernet": " {ipaddr}/{cidr}", // Icon: ethernet
+      "format-disconnected": "⚠ Disconnected",
       "tooltip-format": "{ifname}: {ipaddr}",
       //"on-click": "networkmanager_dmenu"//"alacritty --class nmtui -e nmtui" //"~/dev/wifimenu/wifimenu"
     },
     "network#vpn": {
       "interface": "ppp0",
-      "format": "  UPC",
+      "format": " UPC",
       "format-disconnected": "",
       "tooltip-format": "{ipaddr}"
     },
@@ -153,8 +152,8 @@
 
     "pulseaudio": {
       //"scroll-step": 1,
-      "format": "{icon}  {volume}%",
-      "format-bluetooth": "{icon}  {volume}%",
+      "format": "{icon} {volume}%",
+      "format-bluetooth": "{icon} {volume}%",
       "format-muted": "",
       "format-icons": {
         "headphones": "",
@@ -176,7 +175,7 @@
       "input-filename": "temp1_input",
       "critical-threshold": 80,
       "interval": 60,
-      "format": "{icon}  {temperatureC}°C",
+      "format": "{icon} {temperatureC}°C",
       "format-icons": [
         "\uf2cb", // Icon: temperature-empty
       "\uf2ca", // Icon: temperature-quarter
@@ -201,7 +200,7 @@
       "format": "",  //<-- Old one
                       //"format": "󰂯",    // <-- New one
       "format-disabled": "󰂲", // Optional: Show a different icon when off
-      "format-connected": " {device_alias}", // Optional: Show device name when connected
+      "format-connected": " {device_alias:.10}", // Optional: Show device name when connected
                                               //"on-click": "footclient -a bluetui -e bluetui",     
       "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
       "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
@@ -210,7 +209,7 @@
 
     "custom/wlogout": {
       "format": "",  // Power symbol icon
-      "on-click": "footclient -a powermenu -e ~/.config/sway/scripts/powermenu.sh",
+      "on-click": "kitty --class powermenu -e ~/.config/sway/scripts/powermenu.sh",
       "tooltip": false
     }
 }

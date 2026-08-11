@@ -14,7 +14,6 @@
   70% {
     color: white;
   }
-
   to {
     color: white;
     background-color: orange;
@@ -50,10 +49,13 @@
   background: rgba(0, 0, 0, 1);
   color: white;
   font-family:
-    Cantarell, "Font Awesome 7 Free", "Font Awesome 7 Free Solid",
-    "Font Awesome 7 Brands", sans-serif;
+    JetbrainsMono NF,
+    "Font Awesome 7 Free",
+    "Font Awesome 7 Free Solid",
+    "Font Awesome 7 Brands",
+    sans-serif;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 /* Each module */
