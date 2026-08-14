@@ -72,7 +72,7 @@
 
     "clock#date": {
       "interval": 120,
-      "format": "\uf133{:%e %b %Y}", // Icon: calendar-alt
+      "format": "\uf133 {:%e %b %Y}", // Icon: calendar-alt
       "tooltip-format": "{:%e %B %Y}"
     },
 
