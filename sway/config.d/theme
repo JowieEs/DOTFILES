@@ -13,10 +13,10 @@ set $dark_grey    #3e4045
 
 # --- Window Colors ---
 # class                 border      background  text    indicator   child_border
-client.focused          $orange     $orange     $bg_0   $orange     $orange
+client.focused          $red     $red     $bg_0   $red     $red
 client.focused_inactive $dark_grey  $bg_1       $fg     $dark_grey  $dark_grey
 client.unfocused        $dark_grey  $bg_0       $fg     $dark_grey  $dark_grey
-client.urgent           $red        $red        $bg_0   $red        $red
+client.urgent           $orange        $orange        $bg_0   $orange        $orange
 
 # Borders & Gaps
 default_border pixel 1

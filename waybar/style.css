@@ -26,7 +26,7 @@
 
 window#waybar {
   background-color: @bg0;
-  border-top: 1px solid @orange;
+  border-top: 1px solid @red;
   color: @fg;
   transition: background-color 0.5s;
 }
@@ -44,7 +44,7 @@ window#waybar.empty #window {
 .modules-right {
   padding: 0 7px 0 7px;
   background-color: @bg0;
-  border-top: 1px solid @orange;
+  border-top: 1px solid @red;
 }
 
 #custom-void {
@@ -52,7 +52,7 @@ window#waybar.empty #window {
   padding-left: 3px;
   font-size: 15px;
   border-radius: 8px;
-  color: @orange;
+  color: @red;
   font-weight: bold;
 }
 
