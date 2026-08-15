@@ -16,7 +16,7 @@ bindsym $mod+Return exec $term
 bindsym $mod+q kill
 bindsym $mod+d exec $menu
 bindsym $mod+Shift+c reload
-bindsym $mod+Shift+e bindsym $mod+Shift+e exec footclient --app-id powermenu ~/.config/sway/scripts/powermenu.sh
+bindsym $mod+Shift+e exec footclient --app-id powermenu ~/.config/sway/scripts/powermenu.sh
 
 # Screenshots (Grim + Slurp)
 bindsym Print exec ~/.config/sway/scripts/screenshot.sh
