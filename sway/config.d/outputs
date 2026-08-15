@@ -4,6 +4,8 @@
 
 # Wallpaper
 output * bg ~/Pictures/vilabackground.png fill
+#output * bg ~/Pictures/skies.png fill
+#output * bg #2c2d30 solid_color
 
 output DP-2 {
   mode 3440x1440@120.000Hz

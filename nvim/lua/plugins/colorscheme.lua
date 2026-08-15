@@ -69,8 +69,9 @@ return {
 		priority = 1000,
 		config = function()
 			require("onedark").setup({
-				style = "dark",
+				style = "warm",
 				toggle_style_key = "<leader>tc",
+				transparent = true,
 			})
 			require("onedark").load()
 		end,

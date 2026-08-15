@@ -1,215 +1,161 @@
-// =============================================================================
-//
-// Waybar configuration
-//
-// Configuration reference: https://github.com/Alexays/Waybar/wiki/Configuration
-//
-// =============================================================================
-
 {
-  // -------------------------------------------------------------------------
-  // Global configuration
-  // -------------------------------------------------------------------------
-
-  "layer": "top",
-
-    "position": "top",
-
-    // If height property would be not present, it'd be calculated dynamically
+    "position": "bottom",
+    "height": 30,
+    "spacing": 5, 
 
     "modules-left": [
-      "sway/workspaces",
-    "sway/mode"
+        "group/workspaces"
     ],
     "modules-center": [
-      //"sway/window",
-      "clock#date",
-    "clock#time",
+        "group/windows"
     ],
     "modules-right": [
-      "cpu",
-    "memory",
-    "temperature",
-    "backlight",
-    "pulseaudio",
-    "bluetooth",
-    "network",
-    "network#vpn",
-    "battery",
-    "tray",
-    "custom/wlogout"
+        "group/cpuram",
+        "group/system",
+        "group/tray-box"
     ],
 
-    // -------------------------------------------------------------------------
-    // Modules
-    // -------------------------------------------------------------------------
-
-    "battery": {
-      "interval":60,
-      "states": {
-        "warning": 30,
-        "critical": 15
-      },
-      // Connected to AC
-      "format": "\uf1e6 {capacity}%", // Icon: bolt
-                                      // Not connected to AC
-      "format-discharging": "{icon} {capacity}%",
-      "format-icons": [
-        "", // Icon: battery-full
-      "", // Icon: battery-three-quarters
-      "", // Icon: battery-half
-      "", // Icon: battery-quarter
-      ""  // Icon: battery-empty
-      ],        
-      "tooltip": true
+    "custom/openbracket": {
+        "format": "[",
+        "tooltip": false
     },
-
-    "clock#time": {
-      "interval": 60,
-      "format": "\uf017 {:%H:%M}",
+    "custom/closebracket": {
+        "format": "]",
+        "tooltip": false
+    },
+    "custom/split": {
+      "format": "|",
       "tooltip": false
     },
 
-    "clock#date": {
-      "interval": 120,
-      "format": "\uf133 {:%e %b %Y}", // Icon: calendar-alt
-      "tooltip-format": "{:%e %B %Y}"
+    "group/utilities": {
+        "orientation": "horizontal",
+        "modules":[
+            "custom/openbracket",
+            "custom/void",
+            "custom/closebracket"
+        ]
+    },
+    "custom/void": {
+        "format": "SYS",
+        "tooltip": false,
+        "on-click": "bemenu-run -b -i -p '' -W 0.27 --fn 'BlexMono Nerd Font 11' --tb '#2c2d30' --tf '#b1b4b9' --fb '#2c2d30' --ff '#b1b4b9' --nb '#2c2d30' --nf '#b1b4b9' --hb '#68aee8' --hf '#2c2d30'"
     },
 
-    "cpu": {
-      "interval": 60,
-      "format": "\uf2db {usage}%", // Icon: microchip
-      "states": {
-        "warning": 70,
-        "critical": 90
-      }
+    "group/workspaces":{
+        "orientation": "horizontal",
+        "modules":[
+            "custom/openbracket",
+            "sway/workspaces",
+            "custom/closebracket"
+        ]
     },
-
-    "custom/keyboard-layout": {
-      "exec": "swaymsg -t get_inputs | grep -m1 'xkb_active_layout_name' | cut -d '\"' -f4",
-      // Interval set only as a fallback, as the value is updated by signal
-      "interval": 30,
-      "format": "  {}", // Icon: keyboard
-                         // Signal sent by Sway key binding (~/.config/sway/key-bindings)
-      "signal": 1, // SIGHUP
-      "tooltip": false
-    },
-
-    "memory": {
-      "interval": 60,
-      "format": "\uf538 {}%", // Icon: memory
-      "states": {
-        "warning": 70,
-        "critical": 90
-      }
-    },
-
-    "network": {
-      "interval": 30,
-      "format-wifi": "  {essid:.10}", // Icon: wifi
-      "format-ethernet": " {ipaddr}/{cidr}", // Icon: ethernet
-      "format-disconnected": "⚠ Disconnected",
-      "tooltip-format": "{ifname}: {ipaddr}",
-      //"on-click": "networkmanager_dmenu"//"alacritty --class nmtui -e nmtui" //"~/dev/wifimenu/wifimenu"
-    },
-    "network#vpn": {
-      "interface": "ppp0",
-      "format": " UPC",
-      "format-disconnected": "",
-      "tooltip-format": "{ipaddr}"
-    },
-    "sway/mode": {
-      "format": "<span style=\"italic\">  {}</span>", // Icon: expand-arrows-alt
-      "tooltip": false
-    },
-
-    "sway/window": {
-      "format": "{}",
-      "max-length": 120
-    },
-
     "sway/workspaces": {
-      "all-outputs": false,
-      "disable-scroll": true,
-      "format": "{icon} {name}",
-      "format-icons": {
-        "1:www": "龜", // Icon: firefox-browser
-        "2:mail": "", // Icon: mail
-        "3:editor": "", // Icon: code
-        "4:terminals": "", // Icon: terminal
-        "5:portal": "", // Icon: terminal
-        "urgent": "",
-        "focused": "",
-        "default": ""
-      }
-    },
-    "custom/volume": {
-      "exec": "~/.config/waybar/scripts/volume-wpctl.sh",
-      "interval": 0,
-      "format": "{}",
-      //"on-click": "swayosd-client --output-volume --toggle-mute"
+        "disable-scroll": true,
+        "all-outputs": false,
+        "format": "{name}"
     },
 
-    "pulseaudio": {
-      //"scroll-step": 1,
-      "format": "{icon} {volume}%",
-      "format-bluetooth": "{icon} {volume}%",
-      "format-muted": "",
-      "format-icons": {
-        "headphones": "",
-        "handsfree": "",
-        "headset": "",
-        "phone": "",
-        "portable": "",
-        "car": "",
-        "default": ["", ""]
-      },
-      "on-click" : "pavucontrol",
-      "on-scroll-down" : "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+ -l 1",
-      "on-scroll-up" : "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-",
-      "tooltip": false,
+    "group/music": {
+        "orientation": "horizontal",
+        "modules": [
+            "custom/openbracket",
+            "mpris",
+            "custom/closebracket"
+        ]
+    },
+    "mpris": {
+        "format": "PLAY: {status_icon} | {dynamic}",
+        "interval": 1,
+        "dynamic-len": 40,
+        "status-icons": {
+            "playing": "▶",
+            "paused": "⏸",
+            "stopped": "⏹"
+        },
+        "dynamic-order": ["artist"]
     },
 
-    "temperature": {
-      "hwmon-path-abs": "/sys/devices/platform/coretemp.0/hwmon",
-      "input-filename": "temp1_input",
-      "critical-threshold": 80,
-      "interval": 60,
-      "format": "{icon} {temperatureC}°C",
-      "format-icons": [
-        "\uf2cb", // Icon: temperature-empty
-      "\uf2ca", // Icon: temperature-quarter
-      "\uf2c9", // Icon: temperature-half
-      "\uf2c8", // Icon: temperature-three-quarters
-      "\uf2c7"  // Icon: temperature-full
-      ],
-      "tooltip": true
+    "group/windows": {
+        "orientation":"horizontal",
+        "modules":[
+            "custom/openbracket",
+            "sway/window",
+            "custom/closebracket"
+        ]
+    },
+    "sway/window": {
+        "format": "{title}",
+        "max-length": 50,
+        "rewrite": {
+            "(.*) - foot": "TRM: $1"
+        }
     },
 
-    "tray": {
-      "icon-size": 16,
-      "spacing": 10
+    "group/cpuram": {
+        "orientation": "horizontal",
+        "modules": [
+            "custom/openbracket",
+            "cpu",
+            "custom/split",
+            "memory",
+            "custom/closebracket"
+        ]
+    },
+    "cpu": {
+        "format": "CPU:{usage}%",
+        "tooltip": false,
+        "interval": 2,
+        "on-click": "footclient -e btop"
+    },
+    "memory":{
+        "format": "RAM:{}%",
+        "tooltip": false,
+        "interval": 2,
+        "on-click": "footclient -e btop"
     },
 
+    "group/system": {
+        "orientation": "horizontal",
+        "modules": [
+            "custom/openbracket",
+            "clock",
+            "custom/split",
+            "backlight",
+            "custom/split",
+            "battery",
+            "custom/closebracket"
+        ]
+    },
+    "clock": {
+        "format": "{:%H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
     "backlight": {
-      "device": "intel_backlight",
-      "format": " {percent}%",
+        "device": "intel_backlight",
+        "format": "BRI:{percent}%",
+        "tooltip": false,
+        "on-scroll-up": "swayosd-client --brightness +5",
+        "on-scroll-down": "swayosd-client --brightness -5"
+    },
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "BAT:{capacity}%"
     },
 
-    "bluetooth": {
-      "format": "",  //<-- Old one
-                      //"format": "󰂯",    // <-- New one
-      "format-disabled": "󰂲", // Optional: Show a different icon when off
-      "format-connected": " {device_alias:.10}", // Optional: Show device name when connected
-                                              //"on-click": "footclient -a bluetui -e bluetui",     
-      "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
-      "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
-      "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
-    },    
-
-    "custom/wlogout": {
-      "format": "",  // Power symbol icon
-      "on-click": "kitty --class powermenu -e ~/.config/sway/scripts/powermenu.sh",
-      "tooltip": false
+    "group/tray-box": {
+        "orientation": "horizontal",
+        "modules": [
+            "custom/openbracket",
+            "tray",
+            "custom/closebracket"
+        ]
+    },
+    "tray": {
+        "icon-size": 14,
+        "spacing": 10
     }
 }

@@ -7,12 +7,8 @@ set $left h
 set $down j
 set $up k
 set $right l
-#set $term footclient
-set $term kitty -1
-set $menu wofi
-#set $menu footclient -a launcher -e ~/.config/sway/scripts/launcher.sh
-#set $menu wmenu-run -f 'BlexMono Nerd Font 11' -N 000000 -n ffffff -S e1251b -s ffffff
-#set $menu j4-dmenu-desktop --dmenu="bemenu -b -i -p '' -W 0.27 --fn 'BlexMono Nerd Font 11' --tb '#000000' --tf '#ffffff' --fb '#000000' --ff '#ffffff' --nb '#000000' --nf '#ffffff' --hb '#e1251b' --hf '#ffffff'"
+set $term footclient
+set $menu j4-dmenu-desktop --dmenu="bemenu -b -i -p '' -W 0.35 -H 25px --fn 'BlexMono Nerd Font 11' --tb '#2c2d30' --tf '#b1b4b9' --fb '#2c2d30' --ff '#b1b4b9' --nb '#2c2d30' --nf '#b1b4b9' --hb '#c99a6e' --hf '#2c2d30'"
 
 ### Key bindings
 # Basics
@@ -20,8 +16,7 @@ bindsym $mod+Return exec $term
 bindsym $mod+q kill
 bindsym $mod+d exec $menu
 bindsym $mod+Shift+c reload
-bindsym $mod+Shift+e exec kitty -1 --class powermenu -e ~/.config/sway/scripts/powermenu.sh
-#bindsym $mod+Shift+e exec swaynag -t warning -m 'Exit Sway?' -B 'Yes, exit sway' 'swaymsg exit'
+bindsym $mod+Shift+e bindsym $mod+Shift+e exec footclient --app-id powermenu ~/.config/sway/scripts/powermenu.sh
 
 # Screenshots (Grim + Slurp)
 bindsym Print exec ~/.config/sway/scripts/screenshot.sh

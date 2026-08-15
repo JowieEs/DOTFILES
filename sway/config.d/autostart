@@ -24,10 +24,7 @@ exec waybar
 exec mako
 
 # Foot server
-#exec foot --server
-
-# Kitty Daemon
-exec kitty -1 --start-as=hidden
+exec foot --server
 
 # Display Managment
 exec_always pkill kanshi; exec kanshi

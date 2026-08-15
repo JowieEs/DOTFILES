@@ -2,41 +2,30 @@
 #  Visuals & Theme
 # ==============================================================================
 
-# Colors
-set $color_focus #e1251b
-set $color_unfocus #333333
+# --- One Dark Warm Palette ---
+set $bg_0         #2c2d30
+set $bg_1         #35373b
+set $fg           #b1b4b9
+set $orange       #c99a6e
+set $blue         #68aee8
+set $red          #e16d77
+set $dark_grey    #3e4045
+
+# --- Window Colors ---
+# class                 border      background  text    indicator   child_border
+client.focused          $orange     $orange     $bg_0   $orange     $orange
+client.focused_inactive $dark_grey  $bg_1       $fg     $dark_grey  $dark_grey
+client.unfocused        $dark_grey  $bg_0       $fg     $dark_grey  $dark_grey
+client.urgent           $red        $red        $bg_0   $red        $red
 
 # Borders & Gaps
-default_border pixel 2           # Keeps the 2px focus border around windows
-default_floating_border pixel 2  # Keeps the 2px border for floating windows
+default_border pixel 1
+default_floating_border pixel 1
 
 smart_borders on
-#smart_gaps on
+smart_gaps on
 
-#gaps inner 8
-#gaps outer 4
-
-gaps inner 0
+# Space between individual windows
+gaps inner 10
+# Space between windows and the screen edges
 gaps outer 0
-
-# Class colors
-client.focused          $color_focus $color_focus #FFFFFF $color_focus
-
-# bar {
-#     position bottom
-#     status_command i3status-rs ~/.config/i3status-rust/config.toml
-#     
-#     # Cleaned up to use only BlexMono Nerd Font
-#     font pango:BlexMono Nerd Font 11
-# 
-#     colors {
-#         background #000000
-#         statusline #ffffff
-#         separator  #666666
-# 
-#         focused_workspace      #e1251b #e1251b    #ffffff
-#         inactive_workspace     #000000 #000000    #888888
-#         urgent_workspace       #c9545d #000000    #c9545d
-#         binding_mode           #ffffff #64727d    #ffffff
-#     }
-# }

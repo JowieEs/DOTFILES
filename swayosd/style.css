@@ -1,61 +1,62 @@
 window#osd {
-    border-radius: 8px;
-    background-color: rgba(15, 15, 15, 0.8);
-    border: none;
+  border-radius: 8px;
+  background-color: rgba(44, 45, 48, 0.8); /* bg0 */
+  border: 1px;
+  border-color: #c99a6e;
 }
 
 #container {
-    margin: 16px;
+  margin: 16px;
 }
 
 image,
 label {
-    color: white;
+  color: #b1b4b9; /* fg */
 }
 
 progressbar:disabled,
 image:disabled {
-    opacity: 0.5;
+  opacity: 0.5;
 }
 
 /* Progress bar styling */
 progressbar {
-    min-height: 6px;
-    border-radius: 999px;
-    background: transparent;
-    border: none;
+  min-height: 6px;
+  border-radius: 999px;
+  background: transparent;
+  border: none;
 }
 
 progressbar trough {
-    min-height: inherit;
-    border-radius: inherit;
-    border: none;
-    background-color: rgba(255, 255, 255, 0.3);
+  min-height: inherit;
+  border-radius: inherit;
+  border: none;
+  background-color: #3e4045; /* bg2 */
 }
 
 progressbar progress {
-    min-height: inherit;
-    border-radius: inherit;
-    border: none;
-    background-color: #e1251b; /* Your original Red */
+  min-height: inherit;
+  border-radius: inherit;
+  border: none;
+  background-color: #e16d77; /* red */
 }
 
 /* Level bar styling (for volume/brightness) */
 levelbar {
-    min-height: 6px;
-    min-width: 200px;
-    background-color: transparent;
+  min-height: 6px;
+  min-width: 200px;
+  background-color: transparent;
 }
 
 levelbar block {
-    min-height: inherit;
-    border-radius: 999px;
+  min-height: inherit;
+  border-radius: 999px;
 }
 
 levelbar block.filled {
-    background-color: #4e9af1; /* Your original Blue */
+  background-color: #c99a6e; /* orange */
 }
 
 levelbar block.empty {
-    background-color: rgba(255, 255, 255, 0.3);
+  background-color: #3e4045; /* bg2 */
 }
