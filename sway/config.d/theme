@@ -23,7 +23,7 @@ default_border pixel 1
 default_floating_border pixel 1
 
 smart_borders on
-#smart_gaps on
+smart_gaps on
 
 # Space between individual windows
 gaps inner 10
