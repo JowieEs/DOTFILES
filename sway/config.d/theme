@@ -26,6 +26,6 @@ smart_borders on
 #smart_gaps on
 
 # Space between individual windows
-gaps inner 0
+gaps inner 10
 # Space between windows and the screen edges
 gaps outer 0
