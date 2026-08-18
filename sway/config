@@ -8,7 +8,8 @@ set $down j
 set $up k
 set $right l
 set $term footclient
-set $menu j4-dmenu-desktop --dmenu="bemenu -b -i -p '' -W 0.35 -H 25px --fn 'BlexMono Nerd Font 11' --tb '#2c2d30' --tf '#b1b4b9' --fb '#2c2d30' --ff '#b1b4b9' --nb '#2c2d30' --nf '#b1b4b9' --hb '#e16d77' --hf '#2c2d30'"
+#set $menu j4-dmenu-desktop --dmenu="bemenu -b -i -p '' -W 0.35 -H 25px --fn 'BlexMono Nerd Font 11' --tb '#2c2d30' --tf '#b1b4b9' --fb '#2c2d30' --ff '#b1b4b9' --nb '#2c2d30' --nf '#b1b4b9' --hb '#e16d77' --hf '#2c2d30'"
+set $menu rofi -show drun -drun-show-icons false -theme ~/.config/rofi/onedark-theme.rasi
 
 ### Key bindings
 # Basics
