@@ -1,0 +1,67 @@
+configuration {
+    font: "BlexMono Nerd Font 11";
+}
+
+* {
+    /* Color Palette */
+    bg:      #2c2d30;
+    fg:      #b1b4b9;
+    sel-bg:  #e16d77;
+    sel-fg:  #2c2d30;
+
+    /* Global defaults */
+    background-color: @bg;
+    text-color:       @fg;
+}
+
+window {
+    anchor:     south;       /* -b (bottom) */
+    location:   south;
+    width:      35%;         /* -W 0.35 */
+    height:     25px;        /* -H 25px */
+    y-offset:   30px;
+    border:     0;
+    padding:    0;
+    children:   [ horibox ];
+}
+
+horibox {
+    orientation: horizontal;
+    children:    [ prompt, entry, listview ];
+}
+
+prompt {
+    enabled: false; /* -p '' (hides prompt entirely) */
+}
+
+entry {
+    expand:           false;
+    width:            10em;
+    background-color: @bg;     /* --fb */
+    text-color:       @fg;     /* --ff */
+    vertical-align:   0.5;
+    padding:          0 5px;
+}
+
+listview {
+    layout:  horizontal;
+    spacing: 5px;
+    lines:   100; /* Arbitrary high number to fill the horizontal space */
+}
+
+element {
+    padding:          0 8px;
+    background-color: @bg;     /* --nb */
+    text-color:       @fg;     /* --nf */
+}
+
+element selected {
+    background-color: @sel-bg; /* --hb */
+    text-color:       @sel-fg; /* --hf */
+}
+
+element-text {
+    background-color: inherit;
+    text-color:       inherit;
+    vertical-align:   0.5;
+}
