@@ -8,14 +8,15 @@ set $down j
 set $up k
 set $right l
 set $term footclient
-#set $menu j4-dmenu-desktop --dmenu="bemenu -b -i -p '' -W 0.35 -H 25px --fn 'BlexMono Nerd Font 11' --tb '#2c2d30' --tf '#b1b4b9' --fb '#2c2d30' --ff '#b1b4b9' --nb '#2c2d30' --nf '#b1b4b9' --hb '#e16d77' --hf '#2c2d30'"
 set $menu rofi -show drun -drun-show-icons false -theme ~/.config/rofi/onedark-theme.rasi
+set $window rofi -show window -theme ~/.config/rofi/onedark-theme.rasi
 
 ### Key bindings
 # Basics
 bindsym $mod+Return exec $term
 bindsym $mod+q kill
 bindsym $mod+d exec $menu
+bindsym $mod+Tab exec $window
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec footclient --app-id powermenu ~/.config/sway/scripts/powermenu.sh
 
@@ -94,15 +95,15 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-# Volume (Using swayosd - limits max volume to 100% to protect speakers)
-bindsym XF86AudioRaiseVolume exec swayosd-client --output-volume +5 --max-volume 100
-bindsym XF86AudioLowerVolume exec swayosd-client --output-volume -5
-bindsym XF86AudioMute        exec swayosd-client --output-volume mute-toggle
-bindsym XF86AudioMicMute     exec swayosd-client --input-volume mute-toggle
+# Volume (Using wpctl - limits max volume to 100% to protect speakers)
+bindsym XF86AudioRaiseVolume exec wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+
+bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bindsym XF86AudioMute        exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindsym XF86AudioMicMute     exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
 
-# Screen Brightness (Using swayosd)
-bindsym XF86MonBrightnessUp   exec swayosd-client --brightness +5
-bindsym XF86MonBrightnessDown exec swayosd-client --brightness -5
+# Screen Brightness (Using brightnessctl)
+bindsym XF86MonBrightnessUp   exec brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%- -n 1%
 
 # Display Settings
 bindsym XF86Display exec nwg-displays

@@ -7,7 +7,8 @@
         "group/workspaces"
     ],
     "modules-center": [
-        "group/windows"
+        // "group/windows",
+        "group/datetime"
     ],
     "modules-right": [
         "group/cpuram",
@@ -36,12 +37,6 @@
             "custom/closebracket"
         ]
     },
-    "custom/void": {
-        "format": "SYS",
-        "tooltip": false,
-        "on-click": "bemenu-run -b -i -p '' -W 0.27 --fn 'BlexMono Nerd Font 11' --tb '#2c2d30' --tf '#b1b4b9' --fb '#2c2d30' --ff '#b1b4b9' --nb '#2c2d30' --nf '#b1b4b9' --hb '#68aee8' --hf '#2c2d30'"
-    },
-
     "group/workspaces":{
         "orientation": "horizontal",
         "modules":[
@@ -76,6 +71,7 @@
         "dynamic-order": ["artist"]
     },
 
+    // Window name section (Left here for reference, but disabled in modules-center)
     "group/windows": {
         "orientation":"horizontal",
         "modules":[
@@ -90,6 +86,25 @@
         "rewrite": {
             "(.*) - foot": "TRM: $1"
         }
+    },
+
+    "group/datetime": {
+        "orientation": "horizontal",
+        "modules": [
+            "custom/openbracket",
+            "clock#date",
+            "custom/split",
+            "clock#time",
+            "custom/closebracket"
+        ]
+    },
+    "clock#date": {
+        "format": "{:%Y-%m-%d}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    "clock#time": {
+        "format": "{:%H:%M}",
+        "tooltip": false
     },
 
     "group/cpuram": {
@@ -119,7 +134,7 @@
         "orientation": "horizontal",
         "modules": [
             "custom/openbracket",
-            "clock",
+            "pulseaudio",
             "custom/split",
             "backlight",
             "custom/split",
@@ -127,9 +142,12 @@
             "custom/closebracket"
         ]
     },
-    "clock": {
-        "format": "{:%H:%M}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    "pulseaudio": {
+        "format": "VOL:{volume}%",
+        "format-muted": "VOL:MUT",
+        "tooltip": false,
+        "on-scroll-up": "swayosd-client --output-volume raise",
+        "on-scroll-down": "swayosd-client --output-volume lower"
     },
     "backlight": {
         "device": "intel_backlight",
