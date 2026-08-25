@@ -70,7 +70,6 @@ return {
 		config = function()
 			require("onedark").setup({
 				style = "warm",
-				toggle_style_key = "<leader>tc",
 				transparent = true,
 			})
 			require("onedark").load()

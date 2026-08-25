@@ -4,7 +4,7 @@
     "spacing": 5, 
 
     "modules-left": [
-        "group/workspaces"
+        "group/workspaces",
     ],
     "modules-center": [
         // "group/windows",
@@ -13,6 +13,8 @@
     "modules-right": [
         "group/cpuram",
         "group/system",
+        "group/power",
+        //"group/wifiblue",
         "group/tray-box"
     ],
 
@@ -99,7 +101,7 @@
         ]
     },
     "clock#date": {
-        "format": "{:%Y-%m-%d}",
+        "format": "{:%d-%m-%Y}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "clock#time": {
@@ -114,19 +116,27 @@
             "cpu",
             "custom/split",
             "memory",
+          //  "custom/split",
+          //  "temperature",
             "custom/closebracket"
         ]
     },
     "cpu": {
         "format": "CPU:{usage}%",
         "tooltip": false,
-        "interval": 2,
+        "interval": 30,
         "on-click": "footclient -e btop"
     },
     "memory":{
         "format": "RAM:{}%",
         "tooltip": false,
-        "interval": 2,
+        "interval": 30,
+        "on-click": "footclient -e btop"
+    },
+    "temperature": {
+        "format": "TEMP:{temperatureC}°C",
+        "tooltip": false,
+        "interval": 30,
         "on-click": "footclient -e btop"
     },
 
@@ -137,8 +147,16 @@
             "pulseaudio",
             "custom/split",
             "backlight",
-            "custom/split",
+            "custom/closebracket"
+        ]
+    },
+    "group/power": {
+        "orientation": "horizontal",
+        "modules": [
+            "custom/openbracket",
             "battery",
+            "custom/split",
+            "power-profiles-daemon",
             "custom/closebracket"
         ]
     },
@@ -162,6 +180,42 @@
             "critical": 15
         },
         "format": "BAT:{capacity}%"
+    },
+    "power-profiles-daemon": {
+          "format": "PPD:{icon}",
+          "tooltip": false,
+          "format-icons": {
+              "default": "BAL",
+              "performance": "PERF",
+              "balanced": "BAL",
+              "power-saver": "PWR"
+          }
+      },
+
+    "group/wifiblue": {
+        "orientation": "horizontal",
+        "modules": [
+            "custom/openbracket",
+            "network",
+            "custom/split",
+            "bluetooth",
+            "custom/closebracket"
+        ]
+    },
+    "network": {
+        "format-wifi": "NET:{ipaddr}",
+        "format-ethernet": "NET:{ipaddr}",
+        "format-disconnected": "NET:DOWN",
+        "tooltip": false,
+        "on-click": "footclient -e impala-nm",
+    },
+    "bluetooth": {
+        "format": "BT:OFF",
+        "format-on": "BT:ON",
+        "format-connected": "BT:CONN",
+        "format-disabled": "BT:OFF",
+        "tooltip": false,
+        "on-click": "footclient -e bluetui",
     },
 
     "group/tray-box": {

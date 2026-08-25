@@ -4,24 +4,20 @@
 
 # --- System Services ---
 # Fix for apps not seeing the Wayland session (screen sharing, etc.)
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway GTK_THEME
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
-exec export _JAVA_AWT_WM_NONREPARENTING=1
 
 # Audio effects (runs in background)
-exec easyeffects --gapplication-service
+#exec easyeffects --gapplication-service
 
 # Start the Polkit authentication agent
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-
-# OSD server
-exec swayosd-server
 
 # Status Bar
 exec waybar
 
 # Notification Daemon
-exec mako
+exec dunst
 
 # Foot server
 exec foot --server
