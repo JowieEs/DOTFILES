@@ -1,0 +1,64 @@
+[global]
+    # -- Typography --
+    font = BlexMono 12
+    markup = full
+    format = "<b>%s</b>\n%b"
+    
+    # -- Geometry & Placement --
+    width = 300
+    height = (0, 200)
+    origin = top-right
+    offset = (20, 20)
+    notification_limit = 5
+
+    # -- Appearance & Minimalism --
+    frame_width = 1
+    padding = 16
+    horizontal_padding = 16
+    text_icon_padding = 16
+    separator_height = 2
+    
+    # -- Progress Bar --
+    progress_bar = true
+    progress_bar_height = 4
+    progress_bar_frame_width = 0
+    progress_bar_min_width = 300
+    progress_bar_max_width = 300
+
+    # -- Base OneDark Warm Colors --
+    # bg0 and fg
+    background = "#2c2d30"
+    foreground = "#b1b4b9"
+    # Red accent for borders, separators, and progress bars
+    frame_color = "#e16d77"
+    separator_color = frame
+    highlight = "#e16d77" 
+
+    # -- Behavior --
+    sort = yes
+    indicate_hidden = yes
+    idle_threshold = 120
+    show_age_threshold = 60
+    word_wrap = yes
+    ignore_newline = no
+
+[urgency_low]
+    # Subtle integration using bg1 and light_grey
+    background = "#2c2d30"
+    foreground = "#8b8d91"
+    frame_color = "#35373b"
+    timeout = 3
+
+[urgency_normal]
+    # Standard look with the red accent border
+    background = "#2c2d30"
+    foreground = "#b1b4b9"
+    frame_color = "#e16d77"
+    timeout = 5
+
+[urgency_critical]
+    # High contrast using bg_d and solid red text/borders
+    background = "#242628"
+    foreground = "#e16d77"
+    frame_color = "#e16d77"
+    timeout = 0
