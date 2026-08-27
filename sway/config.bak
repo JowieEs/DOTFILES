@@ -20,10 +20,18 @@ bindsym $mod+Tab exec $window
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec ~/.config/sway/scripts/powermenu.sh
 
-# Screenshots & Recording
+# Screenshots (Grim + Slurp)
 bindsym Print exec ~/.config/sway/scripts/screenshot.sh
 bindsym $mod+p exec ~/.config/sway/scripts/screenshot.sh
+
+# Screen Recording (wf-recorder + Slurp)
 bindsym $mod+Shift+r exec ~/.config/sway/scripts/record-screen.sh
+
+# Screen Mirroring (wf-mirror)
+#bindsym $mod+Shift+XF86Display exec wl-mirror eDP-1
+
+# Toggle Power Profile Daemon
+bindsym XF86Favorites exec ~/.config/sway/scripts/toggle-power-profile.sh
 
 # Toolbox Terminal
 bindsym $mod+Shift+Return exec $term -e toolbox enter
@@ -96,6 +104,34 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-# Includes (Loads the system defaults, then your local overrides)
+# Volume (Using wpctl - limits max volume to 100% to protect speakers)
+#bindsym XF86AudioRaiseVolume exec wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+
+#bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+#bindsym XF86AudioMute        exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+#bindsym XF86AudioMicMute     exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+#
+## Screen Brightness (Using brightnessctl)
+#bindsym XF86MonBrightnessUp   exec brightnessctl set +5%
+#bindsym XF86MonBrightnessDown exec brightnessctl set 5%- -n 1%
+
+# Display Settings
+bindsym XF86Display exec wdisplays
+
+# Window Rules
+for_window [app_id="blueman-manager"] floating enable, move position 75% 0%, resize set width 30% height 40%
+for_window [app_id="org.pulseaudio.pavucontrol"] floating enable, move position 75% 0%, resize set width 30% height 40%
+for_window [app_id="nwg-displays"] floating enable, move position 75% 0%, resize set width 30% height 40%
+for_window [app_id="com.github.wwmm.easyeffects"] floating enable
+for_window [app_id="launcher"] floating enable, sticky enable, move position center, resize set 400 px 500 px
+for_window [app_id="powermenu"] floating enable, sticky enable, move position center, resize set 200 px 200 px
+
+# Inhibit idle for fullscreen apps (e.g. YouTube, Games)
+for_window [app_id=".*"] inhibit_idle fullscreen
+for_window [class=".*"] inhibit_idle fullscreen
+
+
+
 include /etc/sway/config.d/*
 include $HOME/.config/sway/config.d/*
+include $HOME/.config/sway/outputs
+#include $HOME/.config/sway/workspaces

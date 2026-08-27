@@ -164,15 +164,15 @@
         "format": "VOL:{volume}%",
         "format-muted": "VOL:MUT",
         "tooltip": false,
-        "on-scroll-up": "swayosd-client --output-volume raise",
-        "on-scroll-down": "swayosd-client --output-volume lower"
+        "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
     },
     "backlight": {
         "device": "intel_backlight",
         "format": "BRI:{percent}%",
         "tooltip": false,
-        "on-scroll-up": "swayosd-client --brightness +5",
-        "on-scroll-down": "swayosd-client --brightness -5"
+        "on-scroll-up": "brightnessctl set +5%",
+        "on-scroll-down": "brightnessctl set 5%- -n 1%"
     },
     "battery": {
         "states": {
