@@ -96,6 +96,5 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-# Includes (Loads the system defaults, then your local overrides)
-include /etc/sway/config.d/*
+# Includes
 include $HOME/.config/sway/config.d/*
