@@ -1,5 +1,6 @@
 {
     "position": "bottom",
+    /*"position": "top",*/
     "height": 30,
     "spacing": 5, 
 
